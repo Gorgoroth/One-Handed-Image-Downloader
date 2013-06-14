@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "permissions": [
+    "tabs", "http://*/*"
+  ],
+
+  "name": "One-Handed Image Downloader",
+  "version": "1.0.0",
+  "description": "A mouseless, fast & easy way to save pictures from any website",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Save image"
+  },
+  "background": {
+    "scripts": [ "background.js" ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [ "http://*/*" ],
+      "js": ["jquery.js", "contentscript.js"]
+    }
+  ],
+  "commands": {
+    "save-image": {
+      "description": "Saves the first image on the page",
+      "suggested_key": { "default": "Ctrl+Shift+S" }
+    }
+  }
+}
