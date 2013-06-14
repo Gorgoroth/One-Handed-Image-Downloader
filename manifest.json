@@ -19,6 +19,7 @@
   "content_scripts": [
     {
       "matches": [ "http://*/*" ],
+      "css": ["content.css"],
       "js": ["jquery.js", "contentscript.js"]
     }
   ],
@@ -26,6 +27,10 @@
     "save-image": {
       "description": "Saves the first image on the page",
       "suggested_key": { "default": "Ctrl+Shift+S" }
+    },
+    "close-overlay": {
+      "description": "Closes the overlay",
+      "suggested_key": { "default": "Ctrl+Shift+X" }
     }
   }
 }
