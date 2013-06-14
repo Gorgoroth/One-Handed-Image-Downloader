@@ -20,6 +20,7 @@ It should allow for a VIM like one-handed, home row operation so you can browse 
 * Saving of first or only image to Download folder
 * If more than one big image, show overlay of available images
 * Save images from overlay
+* Refine which image sizes should be downloaded
 
 #### Future possible features
 

@@ -1,3 +1,21 @@
+// Function takes a jquery object as an argument
+// and triggers the file download dialogue
+function download_image(image) {
+  var file_url = image.src;
+  var file_name = image.src.substring(image.src.lastIndexOf("/") + 1);
+
+  var link = document.createElement('a');
+  link.href = file_url;
+  link.target = '_blank';
+  link.download = file_name || 'unknown';
+
+  var e = document.createEvent('Event');
+  e.initEvent('click', true, true);
+  link.dispatchEvent(e);
+
+  (window.URL || window.webkitURL).revokeObjectURL(link.href);
+}
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if(request.action == 'save-image') {
     // Get all images from page and sort by size
@@ -8,19 +26,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       });
 
       // Download the biggest image
-      var file_url = images[0].src;
-      var file_name = images[0].src.substring(images[0].src.lastIndexOf("/") + 1);
-
-      var link = document.createElement('a');
-      link.href = file_url;
-      link.target = '_blank';
-      link.download = file_name || 'unknown';
-
-      var e = document.createEvent('Event');
-      e.initEvent('click', true, true);
-      link.dispatchEvent(e);
-
-      (window.URL || window.webkitURL).revokeObjectURL(link.href);
+      download_image(images[0]);
     }
   }
 });
