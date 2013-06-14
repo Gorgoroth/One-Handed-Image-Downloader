@@ -1,4 +1,5 @@
 // Funtion returns jquery object with many jquery objects
+// Namely, all images fitting our parameters
 function get_images() {
   return $('img');
 }
@@ -23,6 +24,9 @@ function download_image(requested) {
   (window.URL || window.webkitURL).revokeObjectURL(link.href);
 }
 
+// Keypress handler takes event as a parameter
+// calculates pressed keys
+// and calls download_image
 function keypress_handler(e) {
   if((e.which > 48) && (e.which < 58)) {
     // Substract 48 to get number pressed, ie 49-48=1, 57-48=9
@@ -33,68 +37,65 @@ function keypress_handler(e) {
   e.preventDefault();
 }
 
-// TODO remove on page refresh, too
+// Function adds the keyboard listener
 function add_keypress_listener(images) {
   $('body').on('keydown', {arg1: images}, keypress_handler);
 }
 
+// Function removes the keyboard listener
+// TODO remove on page refresh, too
 function remove_keypress_listener() {
   $('body').off('keydown');
 }
 
 // Function takes a jquery object with many jquery objects
-// opens an overlay to the current page
+// Nameley, images
+// Adds an overlay to the current page that lists the images
 function show_overlay(images) {
   var overlay = $('#image-overlay');
 
-  // if(overlay.length) {
-  // This doesn't work well when visiting a new page in the same tab, commented out for now
-  if(false) {
-    // If we have just hidden the overly, simply make visible again
-    overlay.show();
-  } else {
-    overlay = jQuery('<div id="image-overlay"></div>');
-    overlay.appendTo(document.body);
-    overlay = $('#image-overlay');
+  overlay = jQuery('<div id="image-overlay"></div>');
+  overlay.appendTo(document.body);
+  overlay = $('#image-overlay');
 
-    overlay.append(
-      '<h1>One-Handed Image Downloader</h1>'
-      + '<p>Hit A to save all images, 1, 2, 3 etc. to save the numbered images</p>'
-      + '<p>Hit Ctrl + Shift + X to close this overlay</p>'
-    );
+  overlay.append(
+    '<h1>One-Handed Image Downloader</h1>'
+    + '<p>Hit A to save all images, 1, 2, 3 etc. to save the numbered images</p>'
+    + '<p>Hit Ctrl + Shift + X to close this overlay</p>'
+  );
 
-    overlay.append('<ul></ul>');
-    var list = $('#image-overlay ul');
+  overlay.append('<ul></ul>');
+  var list = $('#image-overlay ul');
+  images.each(function(index){
+    list.append('<li><img src="' + $(this).attr('src') + '"><span>' + (index+1) + '</span></li>');
+  });
 
-    // list.append('<li><img src="http://placehold.it/300x300&text=Download+All"></li>');
-    images.each(function(index){
-      list.append('<li><img src="' + $(this).attr('src') + '"><span>' + (index+1) + '</span></li>');
-    });
-    add_keypress_listener();
-  }
+  add_keypress_listener();
 }
 
+// Function closes the overlay and removes the keypress listener
+function close_overlay() {
+  $('#image-overlay').remove();
+  remove_keypress_listener();
+}
+
+// Function
 function save_image() {
   // Get all images from page
   var images = get_images();
+
   if(images.length > 1) {
     // Show overlay for multiple images
     show_overlay(images);
   } else if(images.length == 1) {
-    // Download the biggest image if there's only one
-    download_image(images[0]);
+    // Download the first image if there's only one
+    download_image(0);
   } else {
     // No suitable image found, TODO handle that!
   }
 }
 
-function close_overlay() {
-  // $('#image-overlay').hide();
-  // Hiding is not enough if visiting pages in same tab
-  $('#image-overlay').remove();
-  remove_keypress_listener();
-}
-
+// Evaluate messages send from background.js and call the requested functions
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   switch(request.action) {
     case 'save-image':

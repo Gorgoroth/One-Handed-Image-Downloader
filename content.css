@@ -20,8 +20,10 @@
   margin: 0;
   padding: 30px;
   list-style: none;
+  text-align: center;
 }
 #image-overlay ul li {
+  width: 17%;
   display: inline-block;
   margin-bottom: 30px;
   position: relative;
@@ -29,7 +31,10 @@
 #image-overlay ul li + li {
   margin-left: 30px;
 }
-
+#image-overlay ul li img {
+  width: 100%;
+  height: auto;
+}
 #image-overlay ul li span {
   padding: 0.5em 0;
   display: block;

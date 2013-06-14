@@ -30,6 +30,7 @@ It should allow for a VIM like one-handed, home row operation so you can browse 
 
 #### Future possible features
 
+* Have a neater display
 * Have an option to save on https, too
 * Have an option to customize keys
 * Have an option to black list urls
