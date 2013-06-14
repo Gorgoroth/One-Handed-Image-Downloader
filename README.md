@@ -1,5 +1,5 @@
 # One-Handed Image Downloader
-TL;DR: Get it at the [Chrome Webstore](https://chrome.google.com/webstore/detail/one-handed-image-download/keomfdkndnlioinbbbpeebongahgdgid/related)
+TL;DR: Get it at the [Chrome Webstore](https://chrome.google.com/webstore/detail/one-handed-image-download/keomfdkndnlioinbbbpeebongahgdgid)
 ## A mouseless, fast & easy way to save pictures from any website
 Maybe you know this: Your browsing images, e.g. like on imgur, and suddenly you want to save an image. But your right hand is busy stirring your coffee, petting your cat or whatever.
 
