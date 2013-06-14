@@ -1,21 +1,33 @@
 # One-Handed Image Downloader
 ## A mouseless, fast & easy way to save pictures from any website
-This is a work in progress
+Maybe you know this: Your browsing images, e.g. like on imgur, and suddenly you want to save an image. But your right hand is busy stirring your coffee, petting your cat or whatever.
+
+Maybe you're just some kind of homerow junkie that is repulsed by the thought
+of having to use the mouse.
+
+Don't worry, I'm not here to judge but to help. This is for you.
 
 ### Intention
-This chrome extension should work like this:
+The goal of this extension is to allow for one-handed, mouseless image saving operations on any website.
 
-It should allow for a VIM like one-handed, home row operation so you can browse and save pictures while stirring your coffee, petting your cat or whatever, I'm not here to judge.
+If you active the extension via it's shortcut [Ctrl] + [Shift] + [s], one of two things happen:
 
-1. Namely, activate extension via shortcut, e.g. CTRL + SHIFT + S
-2. Handle Image Download
-    * If there's only one big image, open file download dialog
-    * else display overlay with thumbs of available images, each with size information, press a to save all, 1 for the first, 2 for the second etc.
-3. ???
-4. Profit
+* if there is only one relevant image on the page, the download dialogue is opened
+* if there are many relevant images on the page, you will be presented an overlay with the images. Each images is labeled with a number from 1 to 9 and you can download the image by hitting the number on your keyboard.
+
+    Close the overlay with Esc
+
+Relevant pictures are either higher or wider than 350 px or a GIF.
+
+I will try to keep the gifs from polluting your results, if you notice any wrong GIFs being included, you're very welcome to open an issue or send a pull request.
+
+### Screenshot
+![The One-Handed Image Downloader in Action](screenshot.png)
+
+### Roadmap
+If you want to help make this extension better, just tell me what you need!
 
 #### Initial planed features
-
 ##### Done
 * Keyboard shortcut to activate extension
 * Saving of first or only image
