@@ -53,3 +53,5 @@ If you want to help make this extension better, just tell me what you need!
 * Let user customize minimum image sizes for saving (pixel size and disk space)
 * Follow link on thumbs on page and save full sized images
     This means, if link target is image, save, if not image, save biggest image
+### Thanks
+Icons by [Iconmonstr](http://iconmonstr.com/)
