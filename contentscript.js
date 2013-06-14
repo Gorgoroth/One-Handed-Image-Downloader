@@ -1,7 +1,45 @@
 // Funtion returns jquery object with many jquery objects
 // Namely, all images fitting our parameters
 function get_images() {
-  return $('img');
+  var images = $('img');
+
+  // We want images at least 350 px high or wide
+  // Or gif
+  // but not blank, loading, spinner, loader, etc.
+  // $.each(images, function(index, image){
+  // And we're currently not offering more than 9 images
+  for(var index = 0; index < images.length; index++) {
+    var keep_image = false;
+
+    if(images[index].width >= 350 ) {
+      keep_image = true;
+
+    }
+    if(images[index].height >= 350 ) {
+      keep_image = true;
+    }
+
+    var file_name = images[index].src;
+    if(file_name.match(/gif$/)) {
+      if(!file_name.match(/index-loader.gif$/)
+        && !file_name.match(/blank.gif$/)
+        && !file_name.match(/spinner.gif$/)
+      ) {
+        keep_image = true;
+      }
+    }
+
+    if(index > 8) {
+      keep_image = false;
+    }
+
+    if(keep_image == false) {
+      images.splice(index,1);
+      index--;
+    }
+  }
+
+  return images;
 }
 
 // Function takes a jquery object as an argument
@@ -9,6 +47,7 @@ function get_images() {
 function download_image(requested) {
   var images = get_images();
   var image = images[requested];
+
   var file_url = image.src;
   var file_name = image.src.substring(image.src.lastIndexOf("/") + 1);
 
@@ -33,8 +72,13 @@ function keypress_handler(e) {
     // Substract  1 to get array position, your know, 'cause arrays start at 0
     var requested = e.which - 48 - 1;
     download_image(requested);
+    e.preventDefault();
   }
-  e.preventDefault();
+  // Escape
+  if(e.which == 27) {
+    close_overlay();
+    e.preventDefault();
+  }
 }
 
 // Function adds the keyboard listener
@@ -61,7 +105,7 @@ function show_overlay(images) {
   overlay.append(
     '<h1>One-Handed Image Downloader</h1>'
     + '<p>Hit A to save all images, 1, 2, 3 etc. to save the numbered images</p>'
-    + '<p>Hit Ctrl + Shift + X to close this overlay</p>'
+    + '<p>Hit Esc or Ctrl + Shift + X to close this overlay</p>'
   );
 
   overlay.append('<ul></ul>');
@@ -92,6 +136,7 @@ function save_image() {
     download_image(0);
   } else {
     // No suitable image found, TODO handle that!
+    alert('Sorry, I did not recognize suitable images :(');
   }
 }
 

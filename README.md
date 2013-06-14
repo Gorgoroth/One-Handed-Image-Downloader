@@ -22,6 +22,9 @@ It should allow for a VIM like one-handed, home row operation so you can browse 
 * If more than one image, show overlay of available images
 * Close overlay if Ctrl + Shift + X
 * Save selected images from overlay
+* Reduce images to sensible choices
+    * Width or length more or equal 350 px
+    * Gif but not blank.gif, index.loader.gif, spinner.gif
 
 ##### Todo
 * Save all images from overlay
